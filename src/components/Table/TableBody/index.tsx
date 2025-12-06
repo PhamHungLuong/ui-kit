@@ -4,12 +4,17 @@ import styles from './index.module.scss';
 import { getColumnWidth } from '../utils/calculateSize';
 import { useTableContext } from '../TableContext';
 import { TableSkeleton } from '../TableSkeleton';
+import { TableEmptyBody } from '../TableEmptyBody';
 
 export function TableBody() {
   const { table, height, isLoading } = useTableContext();
 
   if (isLoading) {
     return <TableSkeleton />;
+  }
+
+  if (table.getRowModel().rows.length === 0) {
+    return <TableEmptyBody />
   }
 
   return (
