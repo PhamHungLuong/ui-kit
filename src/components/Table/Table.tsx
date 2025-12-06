@@ -80,7 +80,7 @@ export function Table<TData>({
                         <TableBody />
                     </div>
                 </div>
-                <TablePagination />
+                { pagination && <TablePagination />}
             </div>
         </TableProvider>
     );
