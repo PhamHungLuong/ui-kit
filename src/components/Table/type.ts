@@ -14,6 +14,8 @@ export interface DataTableProps<TData> {
   enableColumnResizing?: boolean;
   height?: string
   manualPagination?: boolean;
+  isLoading?: boolean;
+  skeletonRowCount?: number;
   pagination?: {
     pageCount: number;
     pagination: PaginationState;

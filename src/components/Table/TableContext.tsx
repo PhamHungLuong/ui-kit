@@ -6,6 +6,8 @@ interface TableContextType<TData> {
     data: TData[];
     enableDragAndDrop?: boolean;
     height?: string;
+    isLoading?: boolean;
+    skeletonRowCount?: number;
     pagination?: {
         pageCount: number;
         pagination: PaginationState;

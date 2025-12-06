@@ -21,6 +21,8 @@ export function Table<TData>({
     height = '500px',
     manualPagination = false,
     pagination,
+    isLoading = false,
+    skeletonRowCount = 10,
 }: DataTableProps<TData>) {
     const [itemState, setItemState] = useState<TData[]>(data);
     const [columnSizing, setColumnSizing] = useState({});
@@ -57,7 +59,9 @@ export function Table<TData>({
     const valueProvider = {
         table,
         height,
+        isLoading,
         data: itemState,
+        skeletonRowCount,
         enableDragAndDrop,
     }
 

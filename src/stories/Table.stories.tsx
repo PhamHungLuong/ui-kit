@@ -55,6 +55,7 @@ const defaultColumns = [
   {
     header: 'Status',
     accessorKey: 'status',
+    size: 400,
   },
 ];
 
@@ -127,5 +128,16 @@ export const Empty: Story = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: [],
+  },
+};
+
+export const LoadingState: Story = {
+  args: {
+    id: 'table-5',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    columns: defaultColumns as any,
+    data: [],
+    isLoading: true,
+    skeletonRowCount: 7,
   },
 };
