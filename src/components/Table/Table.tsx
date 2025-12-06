@@ -54,7 +54,8 @@ export function Table<TData>({
                     <div
                         className={styles.tableGrid}
                         style={{
-                            minWidth: table.getTotalSize()
+                            width: '100%',
+                            minWidth: table.getTotalSize(),
                         }}
                     >
                         <TableHeader />
