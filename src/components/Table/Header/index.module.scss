@@ -1,0 +1,59 @@
+/* --- Header Styles --- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: grid;
+}
+
+.headerRow {
+  display: flex;
+  width: 100%;
+}
+
+.headerCell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 8px;
+  border-bottom: 2px solid #ddd;
+  border-right: 1px solid #eee;
+  font-weight: 700;
+  color: #333;
+  position: relative;
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.headerContent {
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Resizer styles used by header cells (column resize handle) */
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: transparent;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(0, 0, 255, 0.5);
+  }
+
+  &.isResizing {
+    background: blue;
+    opacity: 1;
+  }
+}
