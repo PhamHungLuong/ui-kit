@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Table } from '../components/Table/Table';
+import { useTablePagination } from '../components/Table/hooks/useTablePagination';
 
-// --- 1. Định nghĩa Type và Mock Data ---
 type Person = {
   id: string;
   firstName: string;
@@ -31,7 +31,6 @@ const makeData = (len: number): Person[] => {
   }));
 };
 
-// --- 2. Định nghĩa Cột (Columns) ---
 const defaultColumns = [
   {
     header: 'First Name',
@@ -59,7 +58,6 @@ const defaultColumns = [
   },
 ];
 
-// --- 3. Cấu hình Meta ---
 const meta = {
   title: 'Components/Table',
   component: Table,
@@ -79,22 +77,53 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
+    id: 'table-1',
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
+    manualPagination: true,
     data: makeData(100),
   },
 };
 
 export const LargeDataset: Story = {
   args: {
+    id: 'table-2',
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: makeData(1000),
   },
 };
 
+export const ClientSidePagination: Story = {
+  render: (args) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { pagination, onPaginationChange } = useTablePagination({ 
+        initialSize: 10 
+    });
+
+    return (
+      <Table
+        {...args}
+        pagination={{
+          pageCount: Math.ceil(100 / pagination.pageSize),
+          pagination: pagination,
+          onPaginationChange: onPaginationChange
+        }}
+      />
+    );
+  },
+  args: {
+    id: 'table-4',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    columns: defaultColumns as any,
+    data: makeData(100), // 100 dòng data có sẵn
+    height: '400px',
+  },
+};
+
 export const Empty: Story = {
   args: {
+    id: 'table-3',
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: [],

@@ -1,11 +1,17 @@
 import { createContext, useContext } from 'react';
-import { type Table } from '@tanstack/react-table';
+import { type OnChangeFn, type PaginationState, type Table } from '@tanstack/react-table';
 
 interface TableContextType<TData> {
     table: Table<TData>;
     data: TData[];
     enableDragAndDrop?: boolean;
     height?: string;
+    pagination?: {
+        pageCount: number;
+        pagination: PaginationState;
+        optionList?: number[];
+        onPaginationChange: OnChangeFn<PaginationState>;
+    }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

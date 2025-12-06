@@ -1,15 +1,25 @@
 import type {
   CellContext,
   ColumnDefTemplate,
+  OnChangeFn,
+  PaginationState,
 } from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
 export interface DataTableProps<TData> {
+  id: string;
   columns: UnifiedColumnDef<TData>[];
   data: TData[];
   enableDragAndDrop?: boolean;
   enableColumnResizing?: boolean;
   height?: string
+  manualPagination?: boolean;
+  pagination?: {
+    pageCount: number;
+    pagination: PaginationState;
+    optionList?: number[];
+    onPaginationChange: OnChangeFn<PaginationState>; 
+  }
 }
 
 export interface UnifiedColumnDef<TData> {

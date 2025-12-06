@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import {
     getCoreRowModel,
+    getPaginationRowModel,
     useReactTable,
 } from '@tanstack/react-table';
 import type { DataTableProps } from './type';
 import { TableHeader } from './Header';
 import { TableBody } from './TableBody';
 import { TableProvider } from './TableContext';
+import { TablePagination } from './TablePagination';
 
 import styles from './Table.module.scss'
 
 export function Table<TData>({
+    id,
     data,
     columns,
     enableDragAndDrop = false,
     enableColumnResizing = true,
-    height = '500px'
+    height = '500px',
+    manualPagination = false,
+    pagination,
 }: DataTableProps<TData>) {
     const [itemState, setItemState] = useState<TData[]>(data);
     const [columnSizing, setColumnSizing] = useState({});
-
-    console.log('Table Rendered', columnSizing);
 
     useEffect(() => {
         if (enableDragAndDrop) {
@@ -30,10 +33,21 @@ export function Table<TData>({
 
     const table = useReactTable({
         data: itemState,
+        columns,
         state: {
             columnSizing,
+            pagination: pagination?.pagination || {
+                pageIndex: 0,
+                pageSize: data.length,
+            },
         },
-        columns,
+        // set up for pagination
+        manualPagination: manualPagination,
+        pageCount: pagination?.pageCount,
+        onPaginationChange: pagination?.onPaginationChange,
+        getPaginationRowModel: manualPagination ? undefined : getPaginationRowModel(),
+
+        // set up for resizing
         enableColumnResizing: enableColumnResizing,
         onColumnSizingChange: setColumnSizing,
         getCoreRowModel: getCoreRowModel(),
@@ -49,7 +63,7 @@ export function Table<TData>({
 
     return (
         <TableProvider value={valueProvider}>
-            <div className={styles.wrapper}>
+            <div id={id} className={styles.wrapper}>
                 <div className={styles.container}>
                     <div
                         className={styles.tableGrid}
@@ -60,9 +74,9 @@ export function Table<TData>({
                     >
                         <TableHeader />
                         <TableBody />
-                        {/* <TablePagination />/ */}
                     </div>
                 </div>
+                <TablePagination />
             </div>
         </TableProvider>
     );
