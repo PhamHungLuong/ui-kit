@@ -1,6 +1,7 @@
 import type {
   CellContext,
   ColumnDefTemplate,
+  ColumnPinningState,
   OnChangeFn,
   PaginationState,
 } from "@tanstack/react-table";
@@ -16,6 +17,7 @@ export interface DataTableProps<TData> {
   manualPagination?: boolean;
   isLoading?: boolean;
   skeletonRowCount?: number;
+  columnPinning?: ColumnPinningState;
   pagination?: {
     pageCount: number;
     pagination: PaginationState;

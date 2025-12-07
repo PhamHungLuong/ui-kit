@@ -2,8 +2,9 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 2;
+  z-index: 10; 
   display: grid;
+  background-color: white; 
 }
 
 .headerRow {
@@ -21,6 +22,8 @@
   font-weight: 700;
   color: #333;
   position: relative;
+  background-color: white;
+  box-sizing: border-box;
 
   &:last-child {
     border-right: none;
@@ -35,7 +38,6 @@
   white-space: nowrap;
 }
 
-/* Resizer styles used by header cells (column resize handle) */
 .resizer {
   position: absolute;
   right: 0;
@@ -47,7 +49,7 @@
   user-select: none;
   touch-action: none;
   transition: background 0.2s;
-
+  z-index: 5; 
   &:hover {
     background: rgba(0, 0, 255, 0.5);
   }

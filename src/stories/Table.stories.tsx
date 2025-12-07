@@ -34,7 +34,7 @@ const makeData = (len: number): Person[] => {
 const defaultColumns = [
   {
     header: 'First Name',
-    size: 350,
+    size: 150,
     accessorKey: 'firstName'
   },
   {
@@ -44,7 +44,7 @@ const defaultColumns = [
   },
   {
     header: 'Age',
-    size: 300,
+    size: 150,
     accessorKey: 'age',
   },
   {
@@ -139,5 +139,16 @@ export const LoadingState: Story = {
     data: [],
     isLoading: true,
     skeletonRowCount: 7,
+  },
+};
+
+export const PinningLeftTable: Story = {
+  args: {
+    id: 'table-6',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    columns: defaultColumns as any,
+    manualPagination: true,
+    data: makeData(100),
+    columnPinning: { left: ['firstName', 'age'] },
   },
 };

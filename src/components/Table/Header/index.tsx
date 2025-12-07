@@ -4,6 +4,7 @@ import { flexRender } from '@tanstack/react-table';
 import { getColumnWidth } from '../utils/calculateSize';
 import styles from './index.module.scss';
 import { useTableContext } from '../TableContext';
+import { getCommonPinningStyles } from '../utils/getCommonPinningStyles';
 
 export function TableHeader() {
   const { table } = useTableContext();
@@ -13,16 +14,22 @@ export function TableHeader() {
       {table.getHeaderGroups().map((headerGroup) => (
         <div key={headerGroup.id} className={styles.headerRow}>
           {headerGroup.headers.map((header, index) => {
-             // Check this column is the last in the row
              const isLastColumn = index === headerGroup.headers.length - 1;
+             const pinStyles = getCommonPinningStyles(header.column);
              
+             const width = isLastColumn ? 'auto' : getColumnWidth(header.column);
+
              return (
                 <div
                   key={header.id}
                   className={styles.headerCell}
                   style={{
-                    width: isLastColumn ? 'auto' : getColumnWidth(header.column),
+                    width: width,
+                    minWidth: width,
+                    flexShrink: 0,
                     flex: isLastColumn ? 1 : 'unset',
+                    ...pinStyles,
+                    zIndex: pinStyles.position === 'sticky' ? 4 : undefined,
                   }}
                 >
                   <div className={styles.headerContent}>
@@ -31,7 +38,6 @@ export function TableHeader() {
                       : flexRender(header.column.columnDef.header, header.getContext())}
                   </div>
                   
-                  {/* Chỉ hiện resizer nếu KHÔNG PHẢI cột cuối (để tránh xung đột logic) */}
                   {header.column.getCanResize?.() && !isLastColumn && (
                     <div
                       onMouseDown={header.getResizeHandler()}
@@ -39,6 +45,7 @@ export function TableHeader() {
                       className={`${styles.resizer} ${
                         header.column.getIsResizing() ? styles.isResizing : ''
                       }`}
+                      onClick={(e) => e.stopPropagation()} 
                     />
                   )}
                 </div>

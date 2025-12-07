@@ -23,6 +23,7 @@ export function Table<TData>({
     pagination,
     isLoading = false,
     skeletonRowCount = 10,
+    columnPinning = { left: [], right: [] }
 }: DataTableProps<TData>) {
     const [itemState, setItemState] = useState<TData[]>(data);
     const [columnSizing, setColumnSizing] = useState({});
@@ -38,11 +39,15 @@ export function Table<TData>({
         columns,
         state: {
             columnSizing,
+            columnPinning,
             pagination: pagination?.pagination || {
                 pageIndex: 0,
                 pageSize: data.length,
             },
         },
+        // Pinning tables
+        enablePinning: true,
+
         // set up for pagination
         manualPagination: manualPagination,
         pageCount: pagination?.pageCount,
