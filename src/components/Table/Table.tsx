@@ -18,12 +18,14 @@ export function Table<TData>({
     columns,
     enableDragAndDrop = false,
     enableColumnResizing = true,
+    enableSorting = false,
     height = '500px',
     manualPagination = false,
     pagination,
     isLoading = false,
     skeletonRowCount = 10,
-    columnPinning = { left: [], right: [] }
+    columnPinning = { left: [], right: [] },
+    sortingProps,
 }: DataTableProps<TData>) {
     const [itemState, setItemState] = useState<TData[]>(data);
     const [columnSizing, setColumnSizing] = useState({});
@@ -68,6 +70,8 @@ export function Table<TData>({
         data: itemState,
         skeletonRowCount,
         enableDragAndDrop,
+        enableSorting,
+        sortingProps,
     }
 
     return (

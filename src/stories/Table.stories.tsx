@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Table } from '../components/Table/Table';
 import { useTablePagination } from '../components/Table/hooks/useTablePagination';
+import { useTableSorting } from '../components/Table/hooks/UseTableSortingProps';
 
 type Person = {
   id: string;
@@ -33,9 +34,9 @@ const makeData = (len: number): Person[] => {
 
 const defaultColumns = [
   {
-    header: 'First Name',
+    header: <div style={{ color: 'red' }} >First name</div>,
     size: 150,
-    accessorKey: 'firstName'
+    accessorKey: 'firstName',
   },
   {
     header: 'Last Name',
@@ -75,7 +76,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // --- 4. Các Stories ---
-
 export const Primary: Story = {
   args: {
     id: 'table-1',
@@ -98,8 +98,8 @@ export const LargeDataset: Story = {
 export const ClientSidePagination: Story = {
   render: (args) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { pagination, onPaginationChange } = useTablePagination({ 
-        initialSize: 10 
+    const { pagination, onPaginationChange } = useTablePagination({
+      initialSize: 10
     });
 
     return (
@@ -150,5 +150,56 @@ export const PinningLeftTable: Story = {
     manualPagination: true,
     data: makeData(100),
     columnPinning: { left: ['firstName', 'age'] },
+  },
+};
+
+export const PinningRightTable: Story = {
+  args: {
+    id: 'table-6',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    columns: defaultColumns as any,
+    manualPagination: true,
+    data: makeData(100),
+    columnPinning: { right: ['firstName', 'age'] },
+  },
+};
+
+export const ServerSideSorting: Story = {
+  render: (args) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { sorting, onSortingChange } = useTableSorting({
+      initialField: 'firstName',
+      initialDirection: 'asc'
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sortedData = [...args.data].sort((a: any, b: any) => {
+      if (!sorting.id) return 0;
+      
+      const valA = a[sorting.id as keyof Person];
+      const valB = b[sorting.id as keyof Person];
+
+      if (valA < valB) return sorting.direction === 'asc' ? -1 : 1;
+      if (valA > valB) return sorting.direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    return (
+      <Table
+        {...args}
+        data={sortedData}
+        enableSorting={true}
+        sortingProps={{
+          sortedColumnIds: sorting,
+          onSortingChange: onSortingChange,
+        }}
+      />
+    );
+  },
+  args: {
+    id: 'table-sorting',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    columns: defaultColumns as any,
+    data: makeData(20),
   },
 };

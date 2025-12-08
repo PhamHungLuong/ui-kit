@@ -36,6 +36,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .resizer {
@@ -57,5 +60,50 @@
   &.isResizing {
     background: blue;
     opacity: 1;
+  }
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.headerText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  color: #374151;
+}
+
+.sortStatusIcon {
+  display: flex;
+  align-items: center;
+  color: #1890ff;
+  font-size: 12px;
+}
+
+.sortTriggerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  color: #9ca3af;
+  transition: all 0.2s;
+  font-size: 12px; 
+
+  &:hover {
+    background-color: #f3f4f6;
+    color: #4b5563;
+  }
+
+  &.active {
+    color: #1890ff;
+    background-color: #e6f7ff;
   }
 }

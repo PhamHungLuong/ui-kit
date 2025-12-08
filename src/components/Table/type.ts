@@ -7,13 +7,16 @@ import type {
 } from "@tanstack/react-table";
 import type { ReactNode } from "react";
 
+export type SortDirection = 'asc' | 'desc';
+
 export interface DataTableProps<TData> {
   id: string;
   columns: UnifiedColumnDef<TData>[];
   data: TData[];
   enableDragAndDrop?: boolean;
   enableColumnResizing?: boolean;
-  height?: string
+  enableSorting?: boolean;
+  height?: string;
   manualPagination?: boolean;
   isLoading?: boolean;
   skeletonRowCount?: number;
@@ -22,8 +25,20 @@ export interface DataTableProps<TData> {
     pageCount: number;
     pagination: PaginationState;
     optionList?: number[];
-    onPaginationChange: OnChangeFn<PaginationState>; 
-  }
+    onPaginationChange: OnChangeFn<PaginationState>;
+  };
+  sortingProps?: {
+    sortedColumnIds: { id: string, direction: SortDirection };
+    onSortingChange: (data: {id: string, direction: SortDirection}) => void;
+    labels?: {
+      asc?: string | ReactNode;
+      desc?: string | ReactNode;
+    };
+    icons?: {
+      asc?: ReactNode;
+      desc?: ReactNode;
+    };
+  };
 }
 
 export interface UnifiedColumnDef<TData> {
