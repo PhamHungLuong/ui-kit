@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
     getCoreRowModel,
     getPaginationRowModel,
@@ -36,9 +36,31 @@ export function Table<TData>({
         }
     }, [data, enableDragAndDrop]);
 
+    const tableColumns = useMemo(() => {
+        return columns.map((col: any) => {
+            if (col.CustomCellRender && typeof col.CustomCellRender === 'function') {
+                return {
+                    ...col,
+                    cell: ({ row, renderValue, column: { columnDef }, ...rest } : any) => {
+                        const cellData = renderValue();
+                        const { original: rowData } = row;
+                        return col.CustomCellRender(
+                            cellData,
+                            columnDef,
+                            row,
+                            rowData,
+                            rest
+                        );
+                    },
+                };
+            }
+            return col;
+        });
+    }, [columns]);
+
     const table = useReactTable({
         data: itemState,
-        columns,
+        columns: tableColumns,
         state: {
             columnSizing,
             columnPinning,
@@ -89,7 +111,7 @@ export function Table<TData>({
                         <TableBody />
                     </div>
                 </div>
-                { pagination && <TablePagination />}
+                {pagination && <TablePagination />}
             </div>
         </TableProvider>
     );

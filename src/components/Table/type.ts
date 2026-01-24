@@ -41,8 +41,16 @@ export interface DataTableProps<TData> {
   };
 }
 
+export type CustomCellRenderFn<TData> = (
+    cellData: string,
+    rest: any,
+    row: any,
+    columnDef: UnifiedColumnDef<TData>,
+    rowData: TData,
+  ) => ReactNode;
+
 export interface UnifiedColumnDef<TData> {
-  id: string;
+  id?: string;
   header: string;
   size?: number;
   headerJSX?: (props: unknown) => ReactNode;
@@ -53,11 +61,11 @@ export interface UnifiedColumnDef<TData> {
   headerAlign?: string;
   cellAlign?: string;
   cell?: ColumnDefTemplate<CellContext<TData, unknown>>;
-  // renderer?: (props: RendererProps<TData>) => ReactNode;
   utilColumn?: boolean;
   disabledReorder?: boolean;
   sortLabel?: {
     asc: string;
     desc: string;
   };
+  CustomCellRender?: CustomCellRenderFn<TData>;
 }

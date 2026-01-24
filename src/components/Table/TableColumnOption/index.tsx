@@ -22,7 +22,7 @@ interface ITableColumnSort {
   currentDirection: SortDirection | null;
 }
 
-export const TableColumnSort = ({ 
+export const TableColumnOption = ({ 
   columnId, 
   sortingProps, 
   isSorted, 

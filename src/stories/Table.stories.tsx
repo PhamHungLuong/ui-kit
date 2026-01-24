@@ -57,6 +57,10 @@ const defaultColumns = [
     header: 'Status',
     accessorKey: 'status',
     size: 400,
+    CustomCellRender: (info : any) => {
+      console.log(rest);
+      return <span>{info} - Đã custom</span>;
+    }
   },
 ];
 
@@ -89,7 +93,6 @@ export const Primary: Story = {
 export const LargeDataset: Story = {
   args: {
     id: 'table-2',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: makeData(1000),
   },
@@ -115,7 +118,6 @@ export const ClientSidePagination: Story = {
   },
   args: {
     id: 'table-4',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: makeData(100), // 100 dòng data có sẵn
     height: '400px',
@@ -125,7 +127,6 @@ export const ClientSidePagination: Story = {
 export const Empty: Story = {
   args: {
     id: 'table-3',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: [],
   },
@@ -134,7 +135,6 @@ export const Empty: Story = {
 export const LoadingState: Story = {
   args: {
     id: 'table-5',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: [],
     isLoading: true,
@@ -145,7 +145,6 @@ export const LoadingState: Story = {
 export const PinningLeftTable: Story = {
   args: {
     id: 'table-6',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     manualPagination: true,
     data: makeData(100),
@@ -156,7 +155,6 @@ export const PinningLeftTable: Story = {
 export const PinningRightTable: Story = {
   args: {
     id: 'table-6',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     manualPagination: true,
     data: makeData(100),
@@ -172,7 +170,6 @@ export const ServerSideSorting: Story = {
       initialDirection: 'asc'
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sortedData = [...args.data].sort((a: any, b: any) => {
       if (!sorting.id) return 0;
       
@@ -198,7 +195,6 @@ export const ServerSideSorting: Story = {
   },
   args: {
     id: 'table-sorting',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     columns: defaultColumns as any,
     data: makeData(20),
   },

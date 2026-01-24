@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 import { useTableContext } from '../TableContext';
 import { getCommonPinningStyles } from '../utils/getCommonPinningStyles';
 import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
-import { TableColumnSort } from '../TableColumnSort';
+import { TableColumnOption } from '../TableColumnOption';
 
 export function TableHeader() {
   const { table, enableSorting, sortingProps } = useTableContext();
@@ -55,7 +55,7 @@ export function TableHeader() {
                   </div>
                   
                   {canSort && (
-                    <TableColumnSort 
+                    <TableColumnOption 
                       columnId={header.column.id}
                       sortingProps={sortingProps}
                       isSorted={isSorted}
