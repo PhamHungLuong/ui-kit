@@ -1,5 +1,4 @@
 // TablePagination.tsx
-import React from 'react';
 import { useTableContext } from '../TableContext';
 
 import styles from './index.module.scss';

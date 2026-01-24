@@ -1,56 +1,55 @@
 {
   "name": "@luong/ui-kit",
+  "version": "1.0.5",
   "private": false,
+  "type": "module",
   "publishConfig": {
     "registry": "http://192.168.1.8:8081/repository/internal-ui-kit/"
   },
-  "version": "1.0.4",
-  "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/ui-kit.umd.js",
-  "module": "./dist/ui-kit.es.js",
+  "main": "./dist/ui-kit.umd.cjs",
+  "module": "./dist/ui-kit.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/ui-kit.es.js",
-      "require": "./dist/ui-kit.umd.js"
+      "import": "./dist/ui-kit.js",
+      "require": "./dist/ui-kit.umd.cjs"
     }
   },
   "scripts": {
+    "dev": "vite",
     "build": "tsc && vite build",
-    "push": "npm run build && yalc publish --push",
+    "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
   "dependencies": {
-    "@luong/ui-kit": "file:.yalc/@luong/ui-kit",
     "@tanstack/react-table": "^8.21.3",
     "@tanstack/react-virtual": "^3.13.12",
-    "lodash": "^4.17.23",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-icons": "^5.5.0"
+    "lodash": "^4.17.21",
+    "react-icons": "^5.4.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@storybook/react-vite": "^10.1.4",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "eslint-plugin-storybook": "^10.1.4",
-    "globals": "^16.5.0",
-    "sass": "^1.94.2",
-    "storybook": "^10.1.4",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4",
-    "vite-plugin-dts": "^4.5.4"
+    "@eslint/js": "^9.17.0",
+    "@storybook/react-vite": "^10.2.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "sass": "^1.83.0",
+    "storybook": "^10.2.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.4.0",
+    "eslint-plugin-storybook": "10.2.0"
   }
 }

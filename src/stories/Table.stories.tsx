@@ -58,7 +58,6 @@ const defaultColumns = [
     accessorKey: 'status',
     size: 400,
     CustomCellRender: (info : any) => {
-      console.log(rest);
       return <span>{info} - Đã custom</span>;
     }
   },

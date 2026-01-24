@@ -1,5 +1,4 @@
 // TableBody.tsx
-import React from 'react';
 import { flexRender } from '@tanstack/react-table';
 import styles from './index.module.scss';
 import { getColumnWidth } from '../utils/calculateSize';
