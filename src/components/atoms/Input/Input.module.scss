@@ -1,0 +1,157 @@
+@use '../../../styles/tokens.scss' as *;
+@use '../../../styles/mixins.scss' as *;
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-1;
+    width: 100%;
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    background-color: $color-background;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    overflow: hidden;
+
+    &:focus-within {
+        border-color: $color-primary-500;
+        box-shadow: 0 0 0 3px rgba($color-primary-500, 0.1);
+    }
+
+    &.error {
+        border-color: $color-danger-500;
+
+        &:focus-within {
+            border-color: $color-danger-500;
+            box-shadow: 0 0 0 3px rgba($color-danger-500, 0.1);
+        }
+    }
+
+    &.success {
+        border-color: $color-success-500;
+
+        &:focus-within {
+            border-color: $color-success-500;
+            box-shadow: 0 0 0 3px rgba($color-success-500, 0.1);
+        }
+    }
+
+    &.disabled {
+        background-color: $color-neutral-50;
+        cursor: not-allowed;
+    }
+
+    &.sm {
+        min-height: 32px;
+        padding: 0 $spacing-2;
+    }
+
+    &.md {
+        min-height: 40px;
+        padding: 0 $spacing-3;
+    }
+
+    &.lg {
+        min-height: 48px;
+        padding: 0 $spacing-4;
+    }
+}
+
+.input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: $color-text;
+    font-family: $font-family-sans;
+    min-width: 0;
+
+    &::placeholder {
+        color: $color-text-tertiary;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        color: $color-text-tertiary;
+    }
+
+    &.sm {
+        font-size: $font-size-sm;
+        padding: $spacing-1 0;
+    }
+
+    &.md {
+        font-size: $font-size-base;
+        padding: $spacing-2 0;
+    }
+
+    &.lg {
+        font-size: $font-size-lg;
+        padding: $spacing-2 0;
+    }
+}
+
+.addon {
+    @include flex-center;
+    flex-shrink: 0;
+    color: $color-text-secondary;
+
+    &.leftAddon {
+        margin-left: 0;
+    }
+
+    &.rightAddon {
+        margin-right: 0;
+    }
+}
+
+.clearButton {
+    @include reset-button;
+    @include flex-center;
+    flex-shrink: 0;
+    color: $color-text-tertiary;
+    padding: $spacing-1;
+    border-radius: $radius-base;
+    transition: all $transition-fast;
+
+    &:hover {
+        color: $color-text-secondary;
+        background-color: $color-neutral-100;
+    }
+
+    &:focus-visible {
+        @include focus-ring-inset;
+    }
+}
+
+.helperText {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-top: $spacing-1;
+}
+
+.errorText {
+    font-size: $font-size-sm;
+    color: $color-danger-600;
+    margin-top: $spacing-1;
+    display: flex;
+    align-items: center;
+    gap: $spacing-1;
+}
+
+.counter {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    text-align: right;
+    margin-top: $spacing-1;
+
+    &.exceeded {
+        color: $color-danger-600;
+    }
+}

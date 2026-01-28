@@ -1,2 +1,4 @@
+// Atoms
+export * from './components/atoms';
 
-export * from './components/Button';
+// Note: Molecules and Organisms will be added in future phases

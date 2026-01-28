@@ -1,0 +1,129 @@
+@use '../../../styles/tokens.scss' as *;
+@use '../../../styles/mixins.scss' as *;
+
+.button {
+    @include flex-center;
+    position: relative;
+    gap: $spacing-2;
+    font-family: $font-family-sans;
+    font-weight: $font-weight-medium;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all $transition-fast;
+    white-space: nowrap;
+    user-select: none;
+
+    &:focus-visible {
+        @include focus-ring;
+    }
+
+    &:disabled,
+    &.loading {
+        @include disabled;
+    }
+
+    // Variants
+    &.primary {
+        background-color: $color-primary-600;
+        color: $color-text-inverse;
+        border-color: $color-primary-600;
+
+        &:hover:not(:disabled) {
+            background-color: $color-primary-700;
+            border-color: $color-primary-700;
+        }
+
+        &:active:not(:disabled) {
+            background-color: $color-primary-800;
+            border-color: $color-primary-800;
+        }
+    }
+
+    &.secondary {
+        background-color: $color-secondary-100;
+        color: $color-secondary-900;
+        border-color: $color-secondary-200;
+
+        &:hover:not(:disabled) {
+            background-color: $color-secondary-200;
+            border-color: $color-secondary-300;
+        }
+
+        &:active:not(:disabled) {
+            background-color: $color-secondary-300;
+            border-color: $color-secondary-400;
+        }
+    }
+
+    &.danger {
+        background-color: $color-danger-600;
+        color: $color-text-inverse;
+        border-color: $color-danger-600;
+
+        &:hover:not(:disabled) {
+            background-color: $color-danger-700;
+            border-color: $color-danger-700;
+        }
+
+        &:active:not(:disabled) {
+            background-color: $color-danger-800;
+            border-color: $color-danger-800;
+        }
+    }
+
+    &.ghost {
+        background-color: transparent;
+        color: $color-text;
+        border-color: transparent;
+
+        &:hover:not(:disabled) {
+            background-color: $color-neutral-100;
+        }
+
+        &:active:not(:disabled) {
+            background-color: $color-neutral-200;
+        }
+    }
+
+    // Sizes
+    &.sm {
+        padding: $spacing-1 $spacing-3;
+        font-size: $font-size-sm;
+        border-radius: $radius-md;
+        min-height: 32px;
+    }
+
+    &.md {
+        padding: $spacing-2 $spacing-4;
+        font-size: $font-size-base;
+        border-radius: $radius-md;
+        min-height: 40px;
+    }
+
+    &.lg {
+        padding: $spacing-3 $spacing-6;
+        font-size: $font-size-lg;
+        border-radius: $radius-lg;
+        min-height: 48px;
+    }
+}
+
+.iconWrapper {
+    @include flex-center;
+    flex-shrink: 0;
+}
+
+.spinner {
+    @include flex-center;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

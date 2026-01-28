@@ -1,0 +1,65 @@
+@use '../../../styles/tokens.scss' as *;
+@use '../../../styles/mixins.scss' as *;
+
+.progressRoot {
+    position: relative;
+    overflow: hidden;
+    background-color: $color-neutral-200;
+    border-radius: $radius-full;
+    width: 100%;
+
+    &.sm {
+        height: 4px;
+    }
+
+    &.md {
+        height: 8px;
+    }
+
+    &.lg {
+        height: 12px;
+    }
+}
+
+.progressIndicator {
+    height: 100%;
+    transition: width $transition-base;
+    border-radius: $radius-full;
+
+    &.default {
+        background-color: $color-primary-600;
+    }
+
+    &.success {
+        background-color: $color-success-600;
+    }
+
+    &.warning {
+        background-color: $color-warning-600;
+    }
+
+    &.danger {
+        background-color: $color-danger-600;
+    }
+
+    &.indeterminate {
+        animation: indeterminate 1.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    }
+}
+
+.label {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    margin-top: $spacing-2;
+    text-align: right;
+}
+
+@keyframes indeterminate {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}

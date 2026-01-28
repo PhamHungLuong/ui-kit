@@ -13,7 +13,6 @@ export default defineConfig({
         '**/*.stories.ts'
       ],
       include: ['src/components/**', 'src/index.ts'],
-      skipDiagnostics: false,
       insertTypesEntry: true, // create automatically file type,
       rollupTypes: false,
       tsconfigPath: './tsconfig.app.json',

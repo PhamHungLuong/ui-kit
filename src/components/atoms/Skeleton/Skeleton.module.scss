@@ -1,0 +1,33 @@
+@use '../../../styles/tokens.scss' as *;
+
+.skeleton {
+    background: linear-gradient(90deg,
+            $color-neutral-200 0%,
+            $color-neutral-100 50%,
+            $color-neutral-200 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+
+    &.text {
+        height: 1em;
+        border-radius: $radius-base;
+    }
+
+    &.circular {
+        border-radius: $radius-full;
+    }
+
+    &.rectangular {
+        border-radius: $radius-md;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
